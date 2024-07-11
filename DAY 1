@@ -1,0 +1,92 @@
+Q1.)
+import java.util.Scanner;
+
+public class ReverseWord {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("String: ");
+        String input = scanner.nextLine();
+        String reversed = "";
+
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed += input.charAt(i);
+        }
+
+        System.out.println("Reverse String: " + reversed);
+        scanner.close();
+    }
+}
+
+Q.2)
+import java.util.Scanner;
+
+public class StringToInteger {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("String: ");
+        String input = scanner.nextLine();
+
+        int result = 0;
+        for (int i = 0; i < input.length(); i++) {
+            result = result * 10 + (input.charAt(i) - '0');
+        }
+
+        System.out.println("Output Integer: " + result);
+        scanner.close();
+    }
+}
+
+Q.3)
+import java.util.Scanner;
+
+public class CheckUsername {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("Re-enter username: ");
+        String reenteredUsername = scanner.nextLine();
+
+        if (username.equals(reenteredUsername)) {
+            System.out.println("Username is valid.");
+        } else {
+            System.out.println("Username is not valid.");
+        }
+        scanner.close();
+    }
+}
+
+Q.4)
+import java.util.Scanner;
+
+public class SortNames {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] names = new String[5];
+        System.out.println("Enter 5 names:");
+
+        for (int i = 0; i < names.length; i++) {
+            names[i] = scanner.nextLine();
+        }
+
+        System.out.print("Order (A/D): ");
+        char order = scanner.next().charAt(0);
+
+        for (int i = 0; i < names.length - 1; i++) {
+            for (int j = i + 1; j < names.length; j++) {
+                if ((order == 'A' && names[i].compareTo(names[j]) > 0) ||
+                    (order == 'D' && names[i].compareTo(names[j]) < 0)) {
+                    String temp = names[i];
+                    names[i] = names[j];
+                    names[j] = temp;
+                }
+            }
+        }
+
+        System.out.println("Sorted Names:");
+        for (String name : names) {
+            System.out.println(name);
+        }
+        scanner.close();
+    }
+}
