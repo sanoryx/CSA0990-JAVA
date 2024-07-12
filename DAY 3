@@ -1,0 +1,121 @@
+Q.8)
+import java.util.Scanner;
+
+public class FindCharacterInString {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the string: ");
+        String inputString = scanner.nextLine();
+        System.out.print("Enter the character to be searched: ");
+        char searchChar = scanner.next().charAt(0);
+        
+        int index = -1;
+        for (int i = 0; i < inputString.length(); i++) {
+            if (inputString.charAt(i) == searchChar) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            System.out.println(searchChar + " is found in string at index: " + index);
+        } else {
+            System.out.println(searchChar + " is not found in the string");
+        }
+    }
+}
+
+Q.9)
+import java.util.Scanner;
+
+public class ReverseAlphabeticalOrder {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the word: ");
+        String word = scanner.next();
+        
+        char[] letters = word.toCharArray();
+        for (int i = 0; i < letters.length - 1; i++) {
+            for (int j = i + 1; j < letters.length; j++) {
+                if (letters[i] < letters[j]) {
+                    char temp = letters[i];
+                    letters[i] = letters[j];
+                    letters[j] = temp;
+                }
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (char letter : letters) {
+            result.append(letter).append(" ");
+        }
+
+        System.out.println("Alphabetical Order: " + result.toString().trim());
+    }
+}
+
+Q.10)
+import java.util.Scanner;
+
+public class RemoveVowels {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String inputString = scanner.nextLine();
+        
+        String vowels = "aeiouAEIOU";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < inputString.length(); i++) {
+            if (vowels.indexOf(inputString.charAt(i)) == -1) {
+                result.append(inputString.charAt(i));
+            }
+        }
+
+        System.out.println("The string without vowels is: " + result.toString());
+    }
+}
+
+Q.11)
+import java.util.Scanner;
+
+public class MatrixMultiplication {
+    public static void main(String[] args) {
+        int[][] mat1 = {
+            {1, 2},
+            {5, 3}
+        };
+        
+        int[][] mat2 = {
+            {2, 3},
+            {4, 1}
+        };
+
+        int rowsMat1 = mat1.length;
+        int colsMat1 = mat1[0].length;
+        int rowsMat2 = mat2.length;
+        int colsMat2 = mat2[0].length;
+        
+        if (colsMat1 != rowsMat2) {
+            System.out.println("Matrices cannot be multiplied");
+            return;
+        }
+
+        int[][] result = new int[rowsMat1][colsMat2];
+
+        for (int i = 0; i < rowsMat1; i++) {
+            for (int j = 0; j < colsMat2; j++) {
+                for (int k = 0; k < colsMat1; k++) {
+                    result[i][j] += mat1[i][k] * mat2[k][j];
+                }
+            }
+        }
+
+        System.out.println("Result Matrix:");
+        for (int i = 0; i < rowsMat1; i++) {
+            for (int j = 0; j < colsMat2; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
