@@ -1,0 +1,68 @@
+Q.5)
+import java.util.Scanner;
+
+public class SpecialCharacters {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a line:");
+        String line = scanner.nextLine();
+        
+        StringBuilder specialChars = new StringBuilder();
+        int specialCharCount = 0;
+        
+        for (char c : line.toCharArray()) {
+            if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c)) {
+                specialChars.append(c).append(' ');
+                specialCharCount++;
+            }
+        }
+        
+        System.out.println("Special characters: " + specialChars.toString());
+        System.out.println("Number of special characters: " + specialCharCount);
+    }
+}
+
+Q.6)
+import java.util.Scanner;
+
+public class VowelCounter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a statement:");
+        String statement = scanner.nextLine();
+        
+        int vowelCount = 0;
+        for (char c : statement.toLowerCase().toCharArray()) {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                vowelCount++;
+            }
+        }
+        
+        System.out.println("Number of vowels = " + vowelCount);
+    }
+}
+
+Q.7)
+public class SeparateConsonantsAndVowels {
+
+    public static void main(String[] args) {
+        String givenWord = "Engineering";
+        StringBuilder consonants = new StringBuilder();
+        StringBuilder vowels = new StringBuilder();
+
+        for (char c : givenWord.toLowerCase().toCharArray()) {
+            if (isVowel(c)) {
+                vowels.append(c).append(" ");
+            } else if (Character.isLetter(c)) {
+                consonants.append(c).append(" ");
+            }
+        }
+
+        System.out.println("Consonants: " + consonants.toString().trim());
+        System.out.println("Vowels: " + vowels.toString().trim());
+    }
+
+    private static boolean isVowel(char c) {
+        return "aeiou".indexOf(c) != -1;
+    }
+}
