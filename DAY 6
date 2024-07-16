@@ -1,0 +1,85 @@
+Q.1)
+interface Printer {
+    void printDocument(String document);
+
+    default void printDefault() {
+        System.out.println("Printing default document");
+    }
+}
+
+class LaserPrinter implements Printer {
+    public void printDocument(String document) {
+        System.out.println("LaserPrinter is printing: " + document);
+    }
+}
+
+public class Main4 {
+    public static void main(String[] args) {
+        LaserPrinter printer = new LaserPrinter();
+        printer.printDocument("Hello, world!");
+        printer.printDefault();
+    }
+}
+
+Q.2)
+interface MathOperations {
+    int add(int a, int b);
+    int subtract(int a, int b);
+
+    static int multiply(int a, int b) {
+        return a * b;
+    }
+}
+
+class SimpleMath implements MathOperations {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+}
+
+public class Main5 {
+    public static void main(String[] args) {
+        SimpleMath math = new SimpleMath();
+        System.out.println("Addition: " + math.add(5, 3));
+        System.out.println("Subtraction: " + math.subtract(5, 3));
+        System.out.println("Multiplication: " + MathOperations.multiply(5, 3));
+    }
+}
+
+Q.3)
+interface OnClickListener {
+    void onClick();
+}
+
+class Button {
+    private OnClickListener listener;
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void click() {
+        if (listener != null) {
+            listener.onClick();
+        }
+    }
+}
+
+class ClickHandler implements OnClickListener {
+    public void onClick() {
+        System.out.println("Button was clicked!");
+    }
+}
+
+public class Main6 {
+    public static void main(String[] args) {
+        Button button = new Button();
+        ClickHandler handler = new ClickHandler();
+        button.setOnClickListener(handler);
+        button.click();
+    }
+}
