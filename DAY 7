@@ -1,0 +1,107 @@
+Q.1)
+public class MultipleExceptionsExample {
+    public static void main(String[] args) {
+        try {
+            String str = null;
+            System.out.println(str.length());
+            int num = Integer.parseInt("XYZ");
+        } catch (NullPointerException e) {
+            System.out.println("Null pointer exception caught!");
+        } catch (NumberFormatException e) {
+            System.out.println("Number format exception caught!");
+        } finally {
+            System.out.println("The 'try catch' is finished.");
+        }
+    }
+}
+
+Q.2)
+class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+
+public class CustomExceptionExample {
+    public static void main(String[] args) {
+        try {
+            validateAge(15);
+        } catch (CustomException e) {
+            System.out.println("Caught the custom exception: " + e.getMessage());
+        }
+    }
+
+    static void validateAge(int age) throws CustomException {
+        if (age < 18) {
+            throw new CustomException("Age is less than 18");
+        } else {
+            System.out.println("Age is valid");
+        }
+    }
+}
+
+Q.3)
+public class NestedTryCatchExample {
+    public static void main(String[] args) {
+        try {
+            int[] arr = {1, 2, 3};
+            try {
+                System.out.println(arr[5]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Inner catch: Array index out of bounds!");
+            }
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Outer catch: Cannot divide by zero!");
+        } finally {
+            System.out.println("The 'try catch' is finished.");
+        }
+    }
+}
+
+Q.4)
+public class ChainedExceptionExample {
+    public static void main(String[] args) {
+        try {
+            method1();
+        } catch (Exception e) {
+            System.out.println("Caught: " + e);
+            System.out.println("Original cause: " + e.getCause());
+        }
+    }
+
+    static void method1() throws Exception {
+        try {
+            method2();
+        } catch (Exception e) {
+            throw new Exception("Exception in method1", e);
+        }
+    }
+
+    static void method2() throws Exception {
+        throw new Exception("Original exception in method2");
+    }
+}
+
+Q.5)
+public class ExceptionPropagationExample {
+    public static void main(String[] args) {
+        try {
+            methodA();
+        } catch (Exception e) {
+            System.out.println("Exception caught in main: " + e);
+        }
+    }
+
+    static void methodA() throws Exception {
+        methodB();
+    }
+
+    static void methodB() throws Exception {
+        methodC();
+    }
+
+    static void methodC() throws Exception {
+        throw new Exception("Exception in methodC");
+    }
+}
