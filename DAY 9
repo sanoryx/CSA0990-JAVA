@@ -111,3 +111,29 @@ public class PrimeNumbers {
         return true;
     }
 }
+
+Q.5)
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class NumberSquareArray {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the lower range: ");
+        int lower = scanner.nextInt();
+        System.out.print("Enter the upper range: ");
+        int upper = scanner.nextInt();
+        
+        if (lower > upper) {
+            System.out.println("Invalid range.");
+            return;
+        }
+
+        ArrayList<String> array = new ArrayList<>();
+        for (int i = lower; i <= upper; i++) {
+            array.add("(" + i + ", " + (i * i) + ")");
+        }
+        
+        System.out.println(array);
+    }
+}
