@@ -1,0 +1,88 @@
+Q.1)
+import java.util.Scanner;
+
+public class DaysConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of days: ");
+        int totalDays = scanner.nextInt();
+        
+        convertDays(totalDays);
+
+        int[] testCases = {38, 4, 0, -365, -45};
+        for (int testCase : testCases) {
+            System.out.println("Input days: " + testCase);
+            convertDays(testCase);
+        }
+    }
+
+    private static void convertDays(int totalDays) {
+        if (totalDays < 0) {
+            System.out.println("Please enter a non-negative number of days.");
+            return;
+        }
+        int years = totalDays / 365;
+        int weeks = (totalDays % 365) / 7;
+        int days = (totalDays % 365) % 7;
+        
+        System.out.println("No. of years: " + years);
+        System.out.println("No. of weeks: " + weeks);
+        System.out.println("No. of days: " + days);
+    }
+}
+
+Q.2)
+import java.util.Scanner;
+
+public class CollegeUsers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Total Users: ");
+        int totalUsers = scanner.nextInt();
+        System.out.print("Staff Users: ");
+        int staffUsers = scanner.nextInt();
+        
+        int nonTeachingStaffUsers = staffUsers / 3;
+        int studentUsers = totalUsers - (staffUsers + nonTeachingStaffUsers);
+        
+        System.out.println("Student Users: " + studentUsers);
+    }
+}
+
+Q.3)
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Scanner;
+
+public class UniquePermutations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Given Number: ");
+        String number = scanner.next();
+
+        Set<String> permutations = new HashSet<>();
+        permute(number.toCharArray(), 0, permutations);
+
+        System.out.println("Permutations are:");
+        permutations.forEach(System.out::println);
+    }
+
+    private static void permute(char[] array, int index, Set<String> permutations) {
+        if (index == array.length - 1) {
+            permutations.add(new String(array));
+        } else {
+            for (int i = index; i < array.length; i++) {
+                swap(array, index, i);
+                permute(array, index + 1, permutations);
+                swap(array, index, i);
+            }
+        }
+    }
+
+    private static void swap(char[] array, int i, int j) {
+        char temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
