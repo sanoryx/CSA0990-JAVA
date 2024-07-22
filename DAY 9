@@ -1,0 +1,113 @@
+Q.1)
+import java.util.Scanner;
+
+public class DaysConversion {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of days: ");
+        int totalDays = scanner.nextInt();
+        
+        int years = totalDays / 365;
+        int remainingDays = totalDays % 365;
+        int weeks = remainingDays / 7;
+        int days = remainingDays % 7;
+        
+        System.out.println("No. of years: " + years);
+        System.out.println("No. of weeks: " + weeks);
+        System.out.println("No. of days: " + days);
+    }
+}
+
+Q.2)
+import java.util.Scanner;
+
+public class CollegeUsers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Total Users: ");
+        int totalUsers = scanner.nextInt();
+        System.out.print("Staff Users: ");
+        int staffUsers = scanner.nextInt();
+        
+        if (totalUsers >= 0 && staffUsers >= 0 && staffUsers <= totalUsers) {
+            int nonTeachingStaff = staffUsers / 3;
+            int studentUsers = totalUsers - staffUsers - nonTeachingStaff;
+            System.out.println("Student Users: " + studentUsers);
+        } else {
+            System.out.println("Invalid input.");
+        }
+    }
+}
+
+Q.3)
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Factors {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Given Number: ");
+        int number = scanner.nextInt();
+        System.out.print("N: ");
+        int n = scanner.nextInt();
+        
+        ArrayList<Integer> factors = new ArrayList<>();
+        for (int i = 1; i <= Math.abs(number); i++) {
+            if (number % i == 0) {
+                factors.add(i);
+            }
+        }
+        
+        System.out.println("Number of factors = " + factors.size());
+        if (n > 0 && n <= factors.size()) {
+            System.out.println(n + "th factor of " + number + " = " + factors.get(n - 1));
+        } else {
+            System.out.println("Invalid N value.");
+        }
+    }
+}
+
+Q.4)
+import java.util.Scanner;
+
+public class PrimeNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("N: ");
+        int n = scanner.nextInt();
+        
+        if (n <= 0) {
+            System.out.println("Invalid input.");
+            return;
+        }
+
+        int count = 0, num = 2, nthPrime = 0;
+        while (count < n) {
+            if (isPrime(num)) {
+                nthPrime = num;
+                count++;
+            }
+            num++;
+        }
+        
+        System.out.println(n + "th Prime number is " + nthPrime);
+        int nextPrimeCount = 0;
+        num = nthPrime + 1;
+        System.out.print(n + " prime numbers after " + nthPrime + " are: ");
+        while (nextPrimeCount < n) {
+            if (isPrime(num)) {
+                System.out.print(num + (nextPrimeCount < n - 1 ? ", " : ""));
+                nextPrimeCount++;
+            }
+            num++;
+        }
+    }
+
+    public static boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
