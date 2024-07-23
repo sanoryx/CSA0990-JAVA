@@ -1,0 +1,215 @@
+Q.1)
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class UniquePermutations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Given Number: ");
+        int number = scanner.nextInt();
+        String numStr = String.valueOf(Math.abs(number));
+        Set<String> permutations = new HashSet<>();
+        permute(numStr, 0, numStr.length() - 1, permutations);
+        
+        System.out.println("Permutations are:");
+        for (String perm : permutations) {
+            System.out.println(perm);
+        }
+    }
+
+    private static void permute(String str, int l, int r, Set<String> permutations) {
+        if (l == r) {
+            permutations.add(str);
+        } else {
+            for (int i = l; i <= r; i++) {
+                str = swap(str, l, i);
+                permute(str, l + 1, r, permutations);
+                str = swap(str, l, i);
+            }
+        }
+    }
+
+    private static String swap(String str, int i, int j) {
+        char[] charArray = str.toCharArray();
+        char temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        return String.valueOf(charArray);
+    }
+}
+
+Q.2)
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class PerfectSquares {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter lower range: ");
+        int lower = scanner.nextInt();
+        System.out.print("Enter upper range: ");
+        int upper = scanner.nextInt();
+        
+        if (lower > upper) {
+            System.out.println("Invalid range.");
+            return;
+        }
+
+        ArrayList<Integer> perfectSquares = new ArrayList<>();
+        for (int i = (int) Math.ceil(Math.sqrt(lower)); i <= Math.floor(Math.sqrt(upper)); i++) {
+            int square = i * i;
+            if (sumOfDigits(square) < 10) {
+                perfectSquares.add(square);
+            }
+        }
+        
+        System.out.println(perfectSquares);
+    }
+
+    public static int sumOfDigits(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+}
+
+Q.3)
+import java.util.Scanner;
+
+class BankAccount {
+    private String depositorName;
+    private int accountNumber;
+    private String accountType;
+    private double balance;
+    
+    public BankAccount(String name, int accNum, String type, double balance) {
+        this.depositorName = name;
+        this.accountNumber = accNum;
+        this.accountType = type;
+        this.balance = balance >= 500 ? balance : 500;
+    }
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+    
+    public void withdraw(double amount) {
+        if (balance - amount >= 500) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient balance. Minimum balance should be Rs.500.00");
+        }
+    }
+    
+    public void displayBalance() {
+        System.out.println("Balance amount: Rs." + balance);
+    }
+}
+
+public class BankAccountDemo {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("Default User", 100, "S", 10000);
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter deposit amount: ");
+        double depositAmount = scanner.nextDouble();
+        account.deposit(depositAmount);
+        account.displayBalance();
+        
+        System.out.print("Enter withdrawal amount: ");
+        double withdrawAmount = scanner.nextDouble();
+        account.withdraw(withdrawAmount);
+        account.displayBalance();
+    }
+}
+
+Q.4)
+import java.util.Scanner;
+
+public class ReverseAndAdd {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        
+        if (number < 0) {
+            System.out.println("Invalid input. Number should be non-negative.");
+            return;
+        }
+        
+        while (!isPalindrome(number)) {
+            int reversed = reverseNumber(number);
+            number += reversed;
+        }
+        
+        System.out.println("Palindrome: " + number);
+    }
+
+    private static int reverseNumber(int num) {
+        int reversed = 0;
+        while (num > 0) {
+            reversed = reversed * 10 + num % 10;
+            num /= 10;
+        }
+        return reversed;
+    }
+
+    private static boolean isPalindrome(int num) {
+        return num == reverseNumber(num);
+    }
+}
+
+Q.5)
+import java.util.Scanner;
+
+class Customer {
+    private int accountNo;
+    private String accountName;
+    private double balance;
+
+    public Customer(int accountNo, String accountName, double balance) {
+        this.accountNo = accountNo;
+        this.accountName = accountName;
+        this.balance = balance;
+    }
+
+    public synchronized void deposit(double amount) {
+        balance += amount;
+        notify();
+    }
+
+    public synchronized void withdraw(double amount) {
+        while (balance < amount) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        balance -= amount;
+        System.out.println("Withdraw operation success, balance amount " + balance);
+    }
+}
+
+public class SynchronizedBankAccount {
+    public static void main(String[] args) {
+        Customer customer = new Customer(1001, "John Doe", 10000);
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter withdrawal amount: ");
+        double withdrawAmount = scanner.nextDouble();
+
+        new Thread(() -> customer.withdraw(withdrawAmount)).start();
+
+        System.out.print("Enter deposit amount: ");
+        double depositAmount = scanner.nextDouble();
+
+        new Thread(() -> customer.deposit(depositAmount)).start();
+    }
+}
