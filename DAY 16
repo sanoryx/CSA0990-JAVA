@@ -1,0 +1,115 @@
+Q.1)
+public class SumArray {
+
+    public static void main(String[] args) {
+        int N = 5;
+        int[] numbers = {1, 2, 3, 4, 5};
+        int sum = 0;
+
+        try {
+            for (int i = 0; i <= N; i++) {
+                sum += numbers[i];
+            }
+            System.out.println("The sum of the array elements is: " + sum);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+            System.out.println("Array index is out of bounds. Ensure that the loop variable does not exceed the array size.");
+        }
+    }
+}
+
+Q.2)
+public class PrimeChecker implements Runnable {
+    private int number;
+
+    public PrimeChecker(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void run() {
+        boolean isPrime = true;
+        if (number <= 1) {
+            isPrime = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        System.out.println(number + " is " + (isPrime ? "prime" : "not prime"));
+    }
+
+    public static void main(String[] args) {
+        int number = 29;
+        Thread thread = new Thread(new PrimeChecker(number));
+        thread.start();
+    }
+}
+
+Q.3)
+public class MultiCatchExample {
+
+    public static void main(String[] args) {
+        try {
+            int[] array = new int[5];
+            array[10] = 100 / 0; // Causes ArithmeticException and ArrayIndexOutOfBoundsException
+            String str = null;
+            str.length(); // Causes NullPointerException
+        } catch (ArithmeticException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+        }
+    }
+}
+
+Q.4)
+public class Box {
+    private double length;
+    private double width;
+    private double height;
+
+    public Box() {
+        length = 1.0;
+        width = 1.0;
+        height = 1.0;
+    }
+
+    public double getVolume() {
+        return length * width * height;
+    }
+
+    public static void main(String[] args) {
+        Box box = new Box();
+        System.out.println("Volume of the box: " + box.getVolume());
+    }
+}
+
+Q.5)
+public class FibonacciGenerator implements Runnable {
+    private int count;
+
+    public FibonacciGenerator(int count) {
+        this.count = count;
+    }
+
+    @Override
+    public void run() {
+        int a = 0, b = 1;
+        System.out.print("Fibonacci series: ");
+        for (int i = 0; i < count; i++) {
+            System.out.print(a + " ");
+            int next = a + b;
+            a = b;
+            b = next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int count = 10;
+        Thread thread = new Thread(new FibonacciGenerator(count));
+        thread.start();
+    }
+}
