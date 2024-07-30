@@ -1,0 +1,200 @@
+Q.1)
+class Parent {
+    void even() {
+        for (int i = 1; i <= 20; i++) {
+            if (i % 2 == 0) System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    void odd() {
+        for (int i = 1; i <= 20; i++) {
+            if (i % 2 != 0) System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    void prime() {
+        for (int i = 1; i <= 20; i++) {
+            boolean isPrime = i > 1;
+            for (int j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void even() {
+        for (int i = 1; i <= 30; i++) {
+            if (i % 2 == 0) System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    @Override
+    void odd() {
+        for (int i = 1; i <= 30; i++) {
+            if (i % 2 != 0) System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    @Override
+    void prime() {
+        for (int i = 1; i <= 30; i++) {
+            boolean isPrime = i > 1;
+            for (int j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Child child = new Child();
+        child.even();
+        child.odd();
+        child.prime();
+    }
+}
+
+Q.2)
+class Example {
+    int a, b;
+
+    Example() {
+        a = 10;
+        b = 15;
+        disp();
+    }
+
+    Example(int a, int b) {
+        this.a = a;
+        this.b = b;
+        disp();
+    }
+
+    void disp() {
+        System.out.println("a = " + a + ", b = " + b);
+    }
+
+    public static void main(String[] args) {
+        new Example();
+        new Example(20, 25);
+    }
+}
+
+Q.3)
+class Base {
+    void area(int a, int b) {
+        System.out.println("Area of square: " + (a * a));
+    }
+}
+
+class Derived extends Base {
+    @Override
+    void area(int a, int b) {
+        System.out.println("Area of rectangle: " + (a * b));
+    }
+
+    public static void main(String[] args) {
+        Base base = new Base();
+        base.area(5, 0);
+        Derived derived = new Derived();
+        derived.area(5, 10);
+    }
+}
+
+Q.4)
+public class MethodOverload {
+
+    int sum(int a, int b) {
+        return a + b;
+    }
+
+    int sum(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    double sum(double a, double b) {
+        return a + b;
+    }
+
+    int sum(int a, double b) {
+        return a + (int) b;
+    }
+
+    public static void main(String[] args) {
+        MethodOverload mo = new MethodOverload();
+        System.out.println(mo.sum(1, 2));
+        System.out.println(mo.sum(1, 2, 3));
+        System.out.println(mo.sum(1.5, 2.5));
+        System.out.println(mo.sum(1, 2.5));
+    }
+}
+
+Q.5)
+interface Tree {
+    void fruits(String... fruits);
+    void leaves(String... leaves);
+    void flowers(String... flowers);
+}
+
+class Branch1 implements Tree {
+    @Override
+    public void fruits(String... fruits) {
+        System.out.println("Branch1 fruits: " + String.join(", ", fruits));
+    }
+
+    @Override
+    public void leaves(String... leaves) {
+        System.out.println("Branch1 leaves: " + String.join(", ", leaves));
+    }
+
+    @Override
+    public void flowers(String... flowers) {
+        System.out.println("Branch1 flowers: " + String.join(", ", flowers));
+    }
+}
+
+class Branch2 implements Tree {
+    @Override
+    public void fruits(String... fruits) {
+        System.out.println("Branch2 fruits: " + String.join(", ", fruits));
+    }
+
+    @Override
+    public void leaves(String... leaves) {
+        System.out.println("Branch2 leaves: " + String.join(", ", leaves));
+    }
+
+    @Override
+    public void flowers(String... flowers) {
+        System.out.println("Branch2 flowers: " + String.join(", ", flowers));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Tree branch1 = new Branch1();
+        branch1.fruits("Apple", "Banana");
+        branch1.leaves("Maple", "Oak");
+        branch1.flowers("Rose", "Lily");
+
+        Tree branch2 = new Branch2();
+        branch2.fruits("Orange", "Mango");
+        branch2.leaves("Pine", "Birch");
+        branch2.flowers("Tulip", "Daisy");
+    }
+}
