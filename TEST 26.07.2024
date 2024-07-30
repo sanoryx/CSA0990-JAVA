@@ -1,0 +1,137 @@
+Q.1)
+class ParentClass {
+
+    public void even() {
+        System.out.println("Parent Class - Even Numbers (1 to 20):");
+        for (int i = 1; i <= 20; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    public void odd() {
+        System.out.println("Parent Class - Odd Numbers (1 to 20):");
+        for (int i = 1; i <= 20; i++) {
+            if (i % 2 != 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    public void prime() {
+        System.out.println("Parent Class - Prime Numbers (1 to 20):");
+        for (int i = 1; i <= 20; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
+
+class ChildClass extends ParentClass {
+
+    @Override
+    public void even() {
+        System.out.println("Child Class - Even Numbers (1 to 30):");
+        for (int i = 1; i <= 30; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void odd() {
+        System.out.println("Child Class - Odd Numbers (1 to 30):");
+        for (int i = 1; i <= 30; i++) {
+            if (i % 2 != 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void prime() {
+        System.out.println("Child Class - Prime Numbers (1 to 30):");
+        for (int i = 1; i <= 30; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ChildClass child = new ChildClass();
+
+        child.even();
+        child.odd();
+        child.prime();
+    }
+}
+
+Q.2)
+class MathOperations {
+    public int sum(int a, int b) {
+        return a + b;
+    }
+    
+    public int sum(int a, int b, int c) {
+        return a + b + c;
+    }
+    
+    public double sum(double a, double b) {
+        return a + b;
+    }
+    
+    public int sum(int a, int b, int c, int d) {
+        return a + b + c + d;
+    }
+
+    public void displaySum(int result) {
+        System.out.println("Sum: " + result);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MathOperations mathOps = new MathOperations();
+        
+        int result1 = mathOps.sum(5, 10); 
+        int result2 = mathOps.sum(5, 10, 15); 
+        mathOps.displaySum(result1);
+        mathOps.displaySum(result2);
+
+        double result3 = mathOps.sum(5.5, 10.2);
+        int result4 = mathOps.sum(1, 2, 3, 4);
+        mathOps.displaySum((int) result3);
+        mathOps.displaySum(result4);
+
+        int result5 = mathOps.sum(10, 5);
+        mathOps.displaySum(result5);
+    }
+}
